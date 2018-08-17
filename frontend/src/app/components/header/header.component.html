@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">{{ pageTitle }}</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" [ngClass]="{ active: page==='home'}">
+                <a class="nav-link"
+                    routerLink="home"
+                    (click)="switchPage('home')">
+                    Home
+                    <span *ngIf="page=='home'" class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: page==='tests'}">
+                <a class="nav-link"
+                    routerLink="tests"
+                    (click)="switchPage('tests')">
+                    Tests
+                    <span *ngIf="page=='tests'" class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: page==='history'}">
+                <a class="nav-link"
+                    routerLink="history"
+                    (click)="switchPage('history')">
+                    History
+                    <span *ngIf="page=='history'" class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

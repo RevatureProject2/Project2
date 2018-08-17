@@ -1,0 +1,41 @@
+<h3>TestNG Results</h3>
+<p *ngIf="loaded"
+    class="pl-1 font-weight-bold text-light"
+    [ngStyle]="{ background: testResults.status == 1 ? 'green' : 'darkred' }">
+    {{ testResults.status | passfail }}
+</p>
+<table class="table table-striped table-dark table-hover table-sm table-responsive" *ngIf="loaded">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Signature</th>
+            <th>Duration</th>
+            <th>Started At</th>
+            <th>Finished At</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let method of testResults.tests; let index = index">
+            <tr>
+                <td>{{ method.name | camelToTitle }}</td>
+                <td>{{ method.signature }}</td>
+                <td>{{ method.duration_ms }} ms</td>
+                <td>{{ method.startTime | dates }}</td>
+                <td>{{ method.finishTime | dates }}</td>
+                <td [ngStyle]="{ background: method.status == 1 ? 'green' : 'darkred' }">{{ method.status |passfail }}</td>
+            </tr>
+            <tr>
+                <td *ngIf="method.exceptionClass != null" class="table-danger">{{ method.exceptionClass }}</td>
+                <td *ngIf="method.exceptionClass != null" colspan="5" class="table-danger">
+                    <button class="btn btn-dark" (click)="toggleStackTrace(index)">{{ btnText }} Stack Trace</button>
+                    <span class="font-weight-bold ml-1">Exception Message: {{ method.exceptionMessage }}</span>
+                    <div *ngIf="method.showStackTrace">
+                        <p [appStacktrace]="method.stackTrace"></p>
+                    </div>
+                </td>
+            </tr>
+    </tbody>
+</table>
+<p *ngIf="!loaded">
+    Please return to <a [routerLink]="['/home']">home</a> to run a test.
+</p>

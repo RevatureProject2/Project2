@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Welcome!</h1>
+            <form>
+                <div class="form-group">
+                    <button class="btn btn-dark btn-lg" (click)="onLoad()">Test!</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8" *ngIf="loading">
+            <h3>Please wait, the tests are executing</h3>
+            <p><a [href]="webSocketURL" target="_blank">Watch the test in real time!</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" *ngIf="loading">
+            <!-- <iframe style="width:100%;height:600px;" [src]="webSocketURL" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-scripts"></iframe> -->
+        </div>
+    </div>
+</div>

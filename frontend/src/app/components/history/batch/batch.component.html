@@ -1,0 +1,36 @@
+<div class="bg-dark">
+    <h3 [ngStyle]="{ background: batch.status == 1 ? 'green' : 'darkred' }">{{ batch.status | passfail }}</h3>
+    <button class="btn btn-dark" (click)="toggleDetails()">Show Details</button>
+    <table *ngIf="showDetails" class="table table-striped table-dark table-hover table-sm table-responsive mb-1">
+        <thead>
+            <td>Name</td>
+            <td>Signature</td>
+            <td>Duration</td>
+            <td>Start Time</td>
+            <td>Finish Time</td>
+            <td>Status</td>
+        </thead>
+        <tbody *ngFor="let test of batch.tests; let index = index">
+            <tr>
+                <td>{{ test.name | camelToTitle }}</td>
+                <td>{{ test.signature }}</td>
+                <td>{{ test.duration_ms }} MS</td>
+                <td>{{ test.startTime | dates }}</td>
+                <td>{{ test.finishTime | dates }}</td>
+                <td [ngStyle]="{ background: test.status == 1 ? 'green' : 'darkred' }">{{ test.status | passfail }}</td>
+            </tr>
+            <tr *ngIf="test.exceptionClass != null">
+                <td class="table-danger">{{ test.exceptionClass }}</td>
+                <td colspan="5" class="table-danger">
+                    <button class="btn btn-dark" (click)="toggleStackTrace(index)">Show Stacktrace</button>
+                    <span class="font-weight-bold ml-1">
+                        Exception Message: {{ test.exceptionMessage }}
+                    </span>
+                    <div *ngIf="test.showStackTrace">
+                        <p [appStacktrace]="test.stackTrace"></p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
