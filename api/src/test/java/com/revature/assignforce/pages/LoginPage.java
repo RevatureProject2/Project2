@@ -19,9 +19,11 @@ public class LoginPage {
 	private String usernameLocator;
 	private String passwordLocator;
 	private String loginButtonLocator;
+	private String logoutButtonLocator;
+	private String errorLoggingInMessageLocator;
 	
-	private String managerUsername;
-	private String managerPassword;
+	public String managerUsername;
+	public String managerPassword;
 	
 	// This will precede all locators in property file for this page
 	private static final String pageIdentifier = "loginpage";
@@ -40,6 +42,9 @@ public class LoginPage {
 		
 		this.managerUsername = props.getProperty(pageIdentifier + "-managerusername");
 		this.managerPassword = props.getProperty(pageIdentifier + "-managerpassword");
+		
+		this.logoutButtonLocator = props.getProperty(pageIdentifier + "-logoutbutton");
+		this.errorLoggingInMessageLocator = props.getProperty(pageIdentifier + "-errorlogginginmessage");
 	}
 	
 	public WebElement getUsernameField() {
@@ -52,6 +57,14 @@ public class LoginPage {
 	
 	public WebElement getLoginButton() {
 		return WebDriverHelper.waitUntilVisible(driver, loginButtonLocator);
+	}
+	
+	public WebElement getLogoutButton() {
+		return WebDriverHelper.waitUntilVisible(driver, logoutButtonLocator);
+	}
+	
+	public WebElement getLoginErrorMessage() {
+		return WebDriverHelper.waitUntilVisible(driver, errorLoggingInMessageLocator);
 	}
 	
 	public void attemptManagerLogin() {

@@ -21,13 +21,33 @@ module.exports = function testFunction() {
             
             const testData = jsonOfTestResult["testng-results"]["suite"]["test"]["class"]["test-method"];
             let suitePassed = true;
-    
+
             for (let test of testData) {
+                let status;
+                switch(test["_attributes"].status) {
+                    case "PASS":
+                        status = 1;
+                        break;
+                    case "FAIL":
+                        status = 0;
+                        break;
+                    case "SKIP":
+                        status = 2;
+                        break;
+                    default:
+                        status = -1;
+                        break;
+                }                
+
+                if (status === -1) {
+                    console.error(`Unexpected Value in status ${test["_attributes"].status}`);
+                }
+
                 const currentTest = new Test({
                     recordID: null,
                     BatchID: null,
                     InitiatedBy: "default",
-                    status: (test["_attributes"].status === "PASS") ? 1 : 0,
+                    status,
                     signature: test["_attributes"].signature,
                     name: test["_attributes"].name,
                     duration_ms: parseInt(test["_attributes"]["duration-ms"]),
@@ -35,7 +55,7 @@ module.exports = function testFunction() {
                     finishTime: test["_attributes"]["finished-at"],
                 });
     
-                if (!currentTest.status) {
+                if (status === 0) {
                     suitePassed = false;
                     currentTest.exceptionClass = test.exception["_attributes"].class;
                     currentTest.exceptionMessage = test.exception.message._cdata;

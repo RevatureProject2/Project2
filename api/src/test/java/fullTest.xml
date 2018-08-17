@@ -2,7 +2,7 @@
 <suite parallel="false" name="FullTest">
   <test name="Login Page">
     <classes>
-      <class name="com.revature.testng.LoginPageTests"/>
+      <class name="com.revature.testng.ManagerLoginTests"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
