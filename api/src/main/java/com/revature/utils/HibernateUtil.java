@@ -1,4 +1,6 @@
-package com.revature.utils;
+package utils;
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -17,7 +19,10 @@ public class HibernateUtil {
     public static SessionFactory getSession(){
         if (mysession == null) {
             log.info("Creating a Session");
-            mysession = new Configuration().configure().buildSessionFactory();
+            String hibernatePropsFilePath = "C:\\Users\\qiunn\\Documents\\Reveture\\Projects\\project2\\api\\src\\main\\resources\\hibernate.cfg.xml";
+            File hibernatePropsFile = new File(hibernatePropsFilePath);
+            Configuration configuration = new Configuration();
+            mysession = configuration.configure(hibernatePropsFile).buildSessionFactory();
         }//end if
         return mysession;
     }//end getSession()
