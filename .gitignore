@@ -1,4 +1,5 @@
 connection.properties
+hibernate.cfg.xml
 
 *.java.hsp
 *.sonarj
