@@ -1,5 +1,6 @@
 const express = require('express')
-const app = express()
+const app = express();
+const proxy = require('express-http-proxy');
 
 const runForeignTests = require('./middleware/runForeignTests');
 
@@ -12,7 +13,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "PUT");
     next();
   });
-
+app.use('/api', proxy('http://localhost:8080/project2'));
 app.post('/run', async (req, res) => {
     try {
         const json = await runForeignTests();
@@ -23,4 +24,5 @@ app.post('/run', async (req, res) => {
 });
 app.get('/', (req, res) => res.send('Hello NullPointerException!!!'))
 
-app.listen(3001, () => console.log('Example app listening on port 3001!'))
+
+app.listen(80, () => console.log('Example app listening on port 80!'))
