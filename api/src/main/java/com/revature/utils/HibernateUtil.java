@@ -1,13 +1,12 @@
-package utils;
-import java.io.File;
-
+package com.revature.utils;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import java.io.File;
 
 /** Util.HibernateUtil Class
- * @author Joshua Pressley
- * @version 1.0 */
+ *  * @author Joshua Pressley
+ *   * @version 1.0 */
 public class HibernateUtil {
     /** Logging object to record log4j messages.*/
     private static Logger log = Logger.getLogger(HibernateUtil.class);
@@ -18,8 +17,8 @@ public class HibernateUtil {
     /** Gets session object*/
     public static SessionFactory getSession(){
         if (mysession == null) {
-            log.info("Creating a Session");
-            String hibernatePropsFilePath = "C:\\Users\\qiunn\\Documents\\Reveture\\Projects\\project2\\api\\src\\main\\resources\\hibernate.cfg.xml";
+	    log.info("Creating a Session");
+            String hibernatePropsFilePath = "/hibernate.cfg.xml";
             File hibernatePropsFile = new File(hibernatePropsFilePath);
             Configuration configuration = new Configuration();
             mysession = configuration.configure(hibernatePropsFile).buildSessionFactory();

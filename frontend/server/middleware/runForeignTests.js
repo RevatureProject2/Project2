@@ -8,7 +8,7 @@ const { pathToTestOutputXML } = require('../constants');
 module.exports = function testFunction() {
     return new Promise(async (resolve, reject) => {
         try {
-            await runCommand("mvn test");
+            await runCommand("/usr/apache/apache-maven-3.5.4/bin/mvn test");
         } catch (err) {
             // Silence chrome headless error
         }
