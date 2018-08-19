@@ -12,13 +12,15 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.revature.utils.Constants;
+
 public class WebDriverHelper {
 	public static WebElement waitUntilVisible(WebDriver driver, String locator) {
 		return new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 	}
 
 	public static WebDriver launchApplication(String url, boolean runHeadless) {
-		File chrome = new File("src/test/resources/chromedriver");
+		File chrome = new File(Constants.pathToChromeExecutable);
 
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("window-size=1200x600");
