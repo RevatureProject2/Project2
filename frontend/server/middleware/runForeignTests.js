@@ -11,6 +11,9 @@ module.exports = function testFunction() {
         try {
             await runCommand(mavenTestCommand);
         } catch (err) {
+            // ! this silences all errors therefore if a path is incorrect it will not report
+            // TODO: Implement dev mode checking to report error in dev mode
+            //console.log(err)
             // Silence chrome headless error
         }
     
@@ -115,15 +118,17 @@ module.exports = function testFunction() {
 
                     // Done sending to frontend
                 } else {
+                    console.log(res.statusCode);
+                    
                     // Send any error straight to frontend
-                    reject(res);
+                    reject('oops');
                 }
             });
 
             postReportRequest.on('error', (err) => {
                 // ? Need to check what data can be in the error, no sensitive data leaks
                 // Send any error straight to frontend
-                reject(err); 
+                reject('yikes'); 
             })
 
             postReportRequest.write(json);
