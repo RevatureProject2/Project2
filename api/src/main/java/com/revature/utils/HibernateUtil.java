@@ -18,7 +18,7 @@ public class HibernateUtil {
     public static SessionFactory getSession(){
         if (mysession == null) {
 	    log.info("Creating a Session");
-            String hibernatePropsFilePath = "/hibernate.cfg.xml";
+            String hibernatePropsFilePath = Constants.hibernateConfigPath;
             File hibernatePropsFile = new File(hibernatePropsFilePath);
             Configuration configuration = new Configuration();
             mysession = configuration.configure(hibernatePropsFile).buildSessionFactory();

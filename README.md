@@ -10,6 +10,7 @@ Revature Project2
         - [API](#api)
     - [Structure](#structure)
     - [Tooling](#tooling)
+    - [Notes](#notes)
 
 <!-- /TOC -->
 
@@ -94,3 +95,7 @@ Project Management Tooling is described below
 *Communication* : [Slack](https://1807july09.slack.com/messages/GC87B4VK9)
 
 *Design / Planning* : [TBA]()
+
+## Notes
+- Deploying changes to hibernate.cfg.xml requires manual step due to sensitive information in the file
+- [api/src/main/java/com/revature/utils/Constants.java](api/src/main/java/com/revature/utils/Constants.java) is used to store file paths and other system dependant information
